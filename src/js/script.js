@@ -78,18 +78,20 @@ const select = {
       thisProduct.formInputs = thisProduct.form.querySelectorAll(select.all.formInputs);
       thisProduct.cartButton = thisProduct.element.querySelector(select.menuProduct.cartButton);
       thisProduct.priceElem = thisProduct.element.querySelector(select.menuProduct.priceElem);
+      thisProduct.imageWrapper = thisProduct.element.querySelector(select.menuProduct.imageWrapper);
     }
     initAccordion() {
       const thisProduct = this;
       thisProduct.accordionTrigger.addEventListener('click', function(event) {
         event.preventDefault();
-        thisProduct.element.classList.toggle(classNames.menuProduct.wrapperActive);
+        
         const activeProducts = document.querySelectorAll(`.${classNames.menuProduct.wrapperActive}`);
         activeProducts.forEach(activeProduct => {
           if (activeProduct !== thisProduct.element) {
             activeProduct.classList.remove(classNames.menuProduct.wrapperActive);
           }
         });
+        thisProduct.element.classList.toggle(classNames.menuProduct.wrapperActive);
       });
     }
     initOrderForm() {
@@ -129,7 +131,16 @@ const select = {
                 price -= option.price;
                 };
               };
+          const optionImage = thisProduct.imageWrapper.querySelector(paramId-optionId)
+            if(optionImage) {
+              if(optionSelected) {
+                optionImage.classList.toggle(classNames.menuProduct.wrapperActive);
+              } else {
+              //  optionImage.classList.remove(classNames.menuProduct.wrapperActive);
+            };
+          };
         };
+
       };
       thisProduct.priceElem.innerHTML = price;    
     }
