@@ -125,27 +125,26 @@ const select = {
             if(optionSelected) {
               if(!option.default) {
                 price += option.price;
-              };
+              }
               } else {
               if(option.default) {
                 price -= option.price;
-                };
-              };
-          const optionImage = thisProduct.imageWrapper.querySelector(paramId-optionId)
+                }
+              }
+          const optionImage = thisProduct.imageWrapper.querySelector(`.${paramId}-${optionId}`);
             if(optionImage) {
               if(optionSelected) {
-                optionImage.classList.toggle(classNames.menuProduct.wrapperActive);
+                optionImage.classList.toggle(classNames.menuProduct.imageVisible);
               } else {
-              //  optionImage.classList.remove(classNames.menuProduct.wrapperActive);
-            };
-          };
-        };
-
-      };
+              optionImage.classList.remove(classNames.menuProduct.imageVisible);
+            }
+          }
+        }
+      }
       thisProduct.priceElem.innerHTML = price;    
     }
   }
-
+  
   const app = {
     initMenu: function(){
       const thisApp = this;
