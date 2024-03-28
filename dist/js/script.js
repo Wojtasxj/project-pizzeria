@@ -151,9 +151,11 @@ class Product {
   initAmountWidget() {
     const thisProduct = this;
     thisProduct.amountWidget = new AmountWidget(thisProduct.amountWidgetElem);
+    thisProduct.amountWidget.element.addEventListener('updated', () => {
+      thisProduct.processOrder();
+    });
   }
 }
-
 class AmountWidget {
   constructor(element) {
     const thisWidget = this;
@@ -173,13 +175,18 @@ class AmountWidget {
     thisWidget.linkDecrease = thisWidget.element.querySelector(select.widgets.amount.linkDecrease);
     thisWidget.linkIncrease = thisWidget.element.querySelector(select.widgets.amount.linkIncrease);
   }
-  
+  announce(){
+    const thisWidget = this;
+    const event = new Event('updated');
+    thisWidget.element.dispatchEvent(event);
+  }
   setValue(value) {
     const thisWidget = this;
     const newValue = parseInt(value);
 
     if(!isNaN(newValue) && newValue >= settings.amountWidget.defaultMin && newValue <= settings.amountWidget.defaultMax) {
       thisWidget.value = newValue;
+      thisWidget.announce();
     } else {
       thisWidget.value = settings.amountWidget.defaultValue;
     }
