@@ -136,7 +136,7 @@ class Product {
         const optionImage = thisProduct.imageWrapper.querySelector(`.${paramId}-${optionId}`);
         if(optionImage) {
           if(optionSelected) {
-            optionImage.classList.toggle(classNames.menuProduct.imageVisible);
+          //  optionImage.classList.toggle(classNames.menuProduct.imageVisible);
           } else {
             optionImage.classList.remove(classNames.menuProduct.imageVisible);
           }
