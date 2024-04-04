@@ -240,9 +240,9 @@ class Cart{
   constructor(element) {
     const thisCart = this;
     thisCart.products = [];
-    initActions();
+    
     thisCart.getElements(element);
-
+    thisCart.initActions();
     console.log('new cart', thisCart);
   }
   getElements(element){
@@ -279,6 +279,7 @@ const app = {
     const thisApp = this;
     thisApp.initData();
     thisApp.initMenu();
+    thisApp.initCart();
   },
 
   initCart: function() {
