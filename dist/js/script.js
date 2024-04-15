@@ -385,19 +385,20 @@ class CartProduct {
 
   remove() {
     const thisCartProduct = this;
-    thisCartProduct.dom.wrapper.remove();
-    const cartIndex = app.cart.products.findIndex(product => product.id === thisCartProduct.id);
-    if (cartIndex !== -1) {
-      app.cart.products.splice(cartIndex, 1);
-      app.cart.update();
-    }
+    const event = new CustomEvent('remove', {
+      bubbles: true,
+      detail: {
+        cartProduct: thisCartProduct,
+      },
+    });
+    thisCartProduct.dom.wrapper.dispatchEvent(event);
   }
 
   initActions() {
     const thisCartProduct = this;
     thisCartProduct.dom.edit.addEventListener('click', function(event){
       event.preventDefault();
-      thisCartProduct.dom.wrapper.classList.toggle(classNames.cartProduct.wrapperActive);
+      
     });
     thisCartProduct.dom.remove.addEventListener('click', function(event){
       event.preventDefault();
