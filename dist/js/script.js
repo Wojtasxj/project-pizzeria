@@ -112,7 +112,7 @@ class Product {
     const thisProduct = this;
     thisProduct.accordionTrigger.addEventListener('click', function(event) {
       event.preventDefault();
-      const activeProducts = document.querySelectorAll(`.${classNames.menuProduct.wrapperActive}`);
+      const activeProducts = document.querySelectorAll(select.menuProduct.clickable);
       activeProducts.forEach(activeProduct => {
         if (activeProduct !== thisProduct.element) {
           activeProduct.classList.remove(classNames.menuProduct.wrapperActive);
