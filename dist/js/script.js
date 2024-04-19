@@ -454,7 +454,7 @@ class CartProduct {
       name: thisCartProduct.name,
       params: thisCartProduct.params,
     };
-  };
+  }
 }
 
 const app = {
