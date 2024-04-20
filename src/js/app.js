@@ -1,8 +1,53 @@
-import {settings, select} from "./settings.js";
+import {settings, select, classNames} from "./settings.js";
 import Product from "./components/Product.js";
 import Cart from "./components/Cart.js";
  
 export const app = {
+  initPages: function(){
+    const thisApp = this;
+    thisApp.pages = document.querySelector(select.containerOf.pages).children;
+    thisApp.navLinks = document.querySelectorAll(select.nav.links);
+    const idFromHash = window.location.hash.replace('#/', '');
+        
+    let pageMatchingHash = thisApp.pages[0].id;
+    
+    for(let page of thisApp.pages){
+      if(page.id == idFromHash){
+        pageMatchingHash = page.id;
+        break;
+      }
+    }
+
+    thisApp.activatePage(pageMatchingHash);
+
+    for (let link of thisApp.navLinks) {
+      link.addEventListener('click', function(event) {
+        const clickedElement = this;
+        event.preventDefault(); 
+        
+        const id = clickedElement.getAttribute('href').replace('#', '');
+        thisApp.activatePage(id);
+
+        /*change url hash*/
+        window.location.hash = '#/' + id;
+      });
+    }
+  },
+
+  activatePage: function(pageId) {
+    const thisApp = this;
+
+    /*add class acive to matching pages, remove from non matching*/
+    for (let page of thisApp.pages) {
+       page.classList.toggle(classNames.pages.active, page.id == pageId);
+    }
+    for (let link of thisApp.navLinks) {
+      link.classList.toggle(
+        classNames.nav.active,
+        link.getAttribute('href') == '#' + pageId);
+   }
+  },
+
   initMenu: function() {
     const thisApp = this;
     for(let productData in thisApp.data.products) {
@@ -25,12 +70,6 @@ export const app = {
       });
   },
 
-  init: function() {
-    const thisApp = this;
-    thisApp.initData();
-    thisApp.initCart();
-  },
-
   initCart: function() {
     const thisApp = this;
     const cartElem = document.querySelector(select.containerOf.cart);
@@ -42,6 +81,12 @@ export const app = {
       app.cart.add(event.detail.product);     
     });
   },
+  
+  init: function() {
+    const thisApp = this;
+    thisApp.initPages();
+    thisApp.initData();
+    thisApp.initCart(); 
+  },
 };
-
-app.init();
+app.init()
