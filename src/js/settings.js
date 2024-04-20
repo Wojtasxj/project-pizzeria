@@ -21,11 +21,11 @@ export const select = {
       cartButton: '[href="#add-to-cart"]',
     },
     widgets: {
-      amount: {
+        amount: {
         input: 'input.amount',
         linkDecrease: 'a[href="#less"]',
         linkIncrease: 'a[href="#more"]',
-      },
+        },
     },
     cart: {
       productList: '.cart__order-summary',

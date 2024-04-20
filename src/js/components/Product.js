@@ -46,7 +46,6 @@ class Product {
         thisProduct.element.classList.toggle(classNames.menuProduct.wrapperActive);
       });
     }
-    
     initOrderForm() {
       const thisProduct = this;
       thisProduct.form.addEventListener('submit', function(event){
