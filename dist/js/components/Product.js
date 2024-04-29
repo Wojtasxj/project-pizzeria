@@ -103,7 +103,7 @@ class Product {
     initAmountWidget() {
       const thisProduct = this;
       thisProduct.amountWidget = new AmountWidget(thisProduct.amountWidgetElem);
-      thisProduct.amountWidget.element.addEventListener('updated', () => {
+      thisProduct.amountWidget.dom.wrapper.addEventListener('updated', () => {
         thisProduct.processOrder();
       });
     }
