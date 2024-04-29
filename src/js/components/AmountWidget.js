@@ -19,6 +19,7 @@ class AmountWidget {
       thisWidget.linkDecrease = thisWidget.element.querySelector(select.widgets.amount.linkDecrease);
       thisWidget.linkIncrease = thisWidget.element.querySelector(select.widgets.amount.linkIncrease);
     }
+    
     announce(){
       const thisWidget = this;
       const event = new CustomEvent('updated', {
