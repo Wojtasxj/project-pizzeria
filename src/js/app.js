@@ -65,7 +65,7 @@ export const app = {
         return rawResponse.json();
       })
       .then(function(parsedResponse) {
-        console.log('parsedResponse', parsedResponse);
+        // console.log('parsedResponse', parsedResponse);
         thisApp.data.products = parsedResponse;
         thisApp.initMenu();
       });
