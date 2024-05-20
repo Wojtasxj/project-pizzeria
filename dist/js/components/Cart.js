@@ -31,6 +31,7 @@ class Cart{
       thisCart.dom.toggleTrigger.addEventListener('click', function(event){
         event.preventDefault();
         thisCart.dom.wrapper.classList.toggle(classNames.cart.wrapperActive);
+        thisCart.update();
       });
       thisCart.dom.productList.addEventListener('updated', function(){
         thisCart.update();
@@ -57,24 +58,25 @@ class Cart{
       const thisCart = this;
       let totalNumber = 0;
       let subtotalPrice = 0;
-    
+      let deliveryFee = settings.cart.deliveryFee;
+      
       for (const product of thisCart.products) {
-        totalNumber += product.amount;
-        subtotalPrice += product.priceSingle * product.amount;
+        product.totalNumber += product.amount;
+        product.subtotalPrice += product.priceSingle * product.amount;
       }
     
-      let totalPrice = subtotalPrice + thisCart.deliveryFee;
+      let totalPrice = subtotalPrice + deliveryFee;
     
       if (totalNumber === 0) {
         totalPrice = 0;
-        thisCart.deliveryFee = 0;
+        deliveryFee = 0;
       }
     
       thisCart.dom.totalNumber.innerHTML = totalNumber;
       thisCart.dom.subtotalPrice.innerHTML = subtotalPrice;
       thisCart.dom.totalPrice.innerHTML = totalPrice;
-      thisCart.dom.deliveryFee.innerHTML = thisCart.deliveryFee;
-    
+      thisCart.dom.deliveryFee.innerHTML = deliveryFee;
+      console.log('deliveryFee:', deliveryFee);
       console.log('totalNumber:', totalNumber);
       console.log('subtotalPrice:', subtotalPrice);
       console.log('totalPrice:', totalPrice);
