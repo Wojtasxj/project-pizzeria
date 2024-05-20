@@ -1,6 +1,7 @@
 import {settings, select, templates, classNames} from "./../settings.js";
 import CartProduct from "./CartProduct.js";
 import { app } from "./../app.js";
+import { utils } from "../utils.js";
 
 class Cart{
     constructor(element) {
@@ -45,8 +46,9 @@ class Cart{
     add(menuProduct) {
       const thisCart = this;
       const generatedHTML = templates.cartProduct(menuProduct);
-      const generatedDOM = document.createRange().createContextualFragment(generatedHTML);
+      const generatedDOM = utils.createDOMFromHTML(generatedHTML);
       thisCart.dom.productList.appendChild(generatedDOM);
+      console.log(thisCart.dom.productList);
       thisCart.products.push(new CartProduct(menuProduct, generatedDOM));
       console.log('adding product', menuProduct);
     }
